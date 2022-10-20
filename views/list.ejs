@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../index.css">
+    <title>Hell's Track</title>
+</head>
+
+<body>
+    <!-- 타이틀 -->
+    <h1>Welcome to Hell's Track</h1>
+    <br>
+    <!-- 날짜 넣어주기 -->
+    <h2>
+        <%= Date %> 의 운동
+    </h2>
+
+    <!-- 이 자리에 운동+몇회+몇세트 결과 집어넣기 -->
+    <!-- for loop를 돌리지만 map function으로 옮겨도 괜찮은 거 같다. -->
+    <div>
+        <h3>
+            <% for (let i=0 ; i < exTrack.length; i++){ %>
+                <h2>
+                    <%=exTrack[i]%>
+                </h2>
+                <% } %>
+        </h3>
+    </div>
+
+
+    <div class="exInput">
+        <form action="/" method="post">
+            <input type="text" name="운동이름" placeholder="운동이름">
+            <input type="text" name="몇세트" placeholder="몇세트">
+            <input type="text" name="몇회" placeholder="몇회">
+            <button type="submit" name="submit">Submit</button>
+        </form>
+    </div>
+
+
+
+</body>
+
+</html>
