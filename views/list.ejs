@@ -1,47 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include("header") -%>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../index.css">
-    <title>Hell's Track</title>
-</head>
-
-<body>
     <!-- 타이틀 -->
-    <h1>Welcome to Hell's Track</h1>
+    <h1 class="Title">🔥Welcome to Hell's Track🔥</h1>
+    <nav>
+        <ul>
+            <li><a href="/">🔥Home🔥</a></li>
+            <li><a href="about">🔥About Us🔥</a></li>
+            <li><a href="contact">🔥Contact🔥</a></li>
+        </ul>
+    </nav>
+
     <br>
     <!-- 날짜 넣어주기 -->
-    <h2>
-        <%= Date %> 의 운동
+
+    <h2 class="listTitle">
+        <%= listTitle %>
     </h2>
 
     <!-- 이 자리에 운동+몇회+몇세트 결과 집어넣기 -->
     <!-- for loop를 돌리지만 map function으로 옮겨도 괜찮은 거 같다. -->
-    <div>
+    <div class="exList">
         <h3>
-            <% for (let i=0 ; i < exTrack.length; i++){ %>
+            <% for (let i=0 ; i < list_contents.length; i++){ %>
                 <h2>
-                    <%=exTrack[i]%>
+                    <%=list_contents[i]%>
                 </h2>
                 <% } %>
         </h3>
     </div>
 
 
-    <div class="exInput">
+    <div>
         <form action="/" method="post">
-            <input type="text" name="운동이름" placeholder="운동이름">
-            <input type="text" name="몇세트" placeholder="몇세트">
-            <input type="text" name="몇회" placeholder="몇회">
-            <button type="submit" name="submit">Submit</button>
+            <label for="list_content">Add excercise</label>
+            <input id="list_content" type="text" name="list_content" placeholder="운동이름">
+            <button type="submit" name="button" value=<%=listTitle%>>Add</button>
         </form>
     </div>
 
-
-
-</body>
-
-</html>
+    <%- include("footer") -%>

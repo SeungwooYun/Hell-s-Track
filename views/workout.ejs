@@ -1,0 +1,12 @@
+<%- include("header") -%>
+
+    <h1 class="listTitle">
+        <%=workoutTitle%>
+    </h1>
+
+    <form action="/workout" method="post">
+        <input type="text" placeholder="kg">
+        <input type="text" placeholder="reps">
+    </form>
+
+    <%- include("footer") -%>
