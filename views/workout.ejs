@@ -4,9 +4,19 @@
         <%=workoutTitle%>
     </h1>
 
+    <div class="listTitle">
+        <% for(let i=0; i < kgsAndReps.length; i++){ %>
+            <h1>
+                <%= kgsAndReps[i][0] %>kg
+                    <%= kgsAndReps[i][1] %>reps
+            </h1>
+            <% } %>
+    </div>
+
     <form action="/workout" method="post">
-        <input type="text" placeholder="kg">
-        <input type="text" placeholder="reps">
+        <input type="text" name="kg" placeholder="kg">
+        <input type="text" name="rep" placeholder="rep">
+        <button type="submit" name="workoutTitle" value=<%=workoutTitle %>>record</button>
     </form>
 
     <%- include("footer") -%>

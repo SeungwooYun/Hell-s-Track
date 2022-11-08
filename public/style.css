@@ -44,7 +44,13 @@ li a {
     color: black;
 }
 
-.exList h2 {
+.exList a{
+    color: orange;
+}
+
+
+.exList h1 {
     text-align: center;
     color: red;
+    display:inline;
 }

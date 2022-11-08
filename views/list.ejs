@@ -1,14 +1,7 @@
 <%- include("header") -%>
 
     <!-- 타이틀 -->
-    <h1 class="Title">🔥Welcome to Hell's Track🔥</h1>
-    <nav>
-        <ul>
-            <li><a href="/">🔥Home🔥</a></li>
-            <li><a href="about">🔥About Us🔥</a></li>
-            <li><a href="contact">🔥Contact🔥</a></li>
-        </ul>
-    </nav>
+
 
     <br>
     <!-- 날짜 넣어주기 -->
@@ -20,20 +13,21 @@
     <!-- 이 자리에 운동+몇회+몇세트 결과 집어넣기 -->
     <!-- for loop를 돌리지만 map function으로 옮겨도 괜찮은 거 같다. -->
     <div class="exList">
-        <h3>
-            <% for (let i=0 ; i < list_contents.length; i++){ %>
-                <h2>
-                    <%=list_contents[i]%>
-                </h2>
-                <% } %>
-        </h3>
+        <% for (let i=0 ; i < workoutList.length; i++){ %>
+            <div>
+                <h1>
+                    <%=workoutList[i]%>
+                </h1>
+                <a href="/workout/<%= workoutList[i] %>">go</a>
+            </div>
+            <% } %>
     </div>
 
 
     <div>
         <form action="/" method="post">
-            <label for="list_content">Add excercise</label>
-            <input id="list_content" type="text" name="list_content" placeholder="운동이름">
+            <label for="workoutList_element">Add excercise</label>
+            <input id="workoutList_element" type="text" name="workoutList_element" placeholder="YOU GOT THIS">
             <button type="submit" name="button" value=<%=listTitle%>>Add</button>
         </form>
     </div>
