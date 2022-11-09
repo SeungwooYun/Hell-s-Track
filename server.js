@@ -2,13 +2,44 @@ const express = require('express')
 var bodyParser = require('body-parser')
 const _ = require('lodash');
 //lodah 사용해서 url param 띄어쓰기나 all lowercase 로 만들어주기.
-
 const app = express()
 const port = 3000
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
-
 app.set('view engine', 'ejs');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/hellstrackDB');
+
+const workoutSchema = new mongoose.Schema({
+    name: String,
+    set: Number,
+    kg: Number,
+    rep: Number,
+    notes: String
+});
+
+const Workout = mongoose.model("Workout", workoutSchema);
+
+const workout = new Workout({
+    name: "Benchpress",
+    set: 1,
+    kg: 60,
+    rep: 10,
+    notes: "That was really tough"
+})
+
+
+// workout.save();
+const deadlifts = new Workout({
+    name: "Deadlifts",
+    set: 1,
+    kg: 100,
+    rep: 10,
+    notes: "I'my dying"
+})
+
+deadlifts.save();
+
 
 // 일단은 몽고DB 사용하려면 백엔드단이 있어야한다고 판단했음. 리액트로 나중에 마이그레이션
 
