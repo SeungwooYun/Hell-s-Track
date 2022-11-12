@@ -10,42 +10,49 @@ app.set('view engine', 'ejs');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/hellstrackDB');
 
-const workoutSchema = new mongoose.Schema({
+
+const workoutNameSchema = new mongoose.Schema({
     name: String,
-    set: Number,
-    kg: Number,
-    rep: Number,
-    notes: String
 });
 
-const Workout = mongoose.model("Workout", workoutSchema);
+const WorkoutName = mongoose.model("Workout", workoutNameSchema);
 
-const workout = new Workout({
-    name: "Benchpress",
-    set: 1,
-    kg: 60,
-    rep: 10,
-    notes: "That was really tough"
+
+
+const workoutName_1 = new WorkoutName({
+    name: "Hi This is Hell's Track"
 })
 
-
-// workout.save();
-const deadlifts = new Workout({
-    name: "Deadlifts",
-    set: 1,
-    kg: 100,
-    rep: 10,
-    notes: "I'my dying"
+const workoutName_2 = new WorkoutName({
+    name: "Add your workouts for the day"
 })
 
-deadlifts.save();
+const workoutName_3 = new WorkoutName({
+    name: "and record all your routine"
+})
+const defaultWorkoutName = [workoutName_1, workoutName_2, workoutName_3]
+
+
+const eachWorkoutSchema = {
+    name: String,
+    kg: Number,
+    rep: Number
+};
+
+const eachWorkoutList = mongoose.model("Eachworkoutlist", eachWorkoutSchema);
+
+
+
+
+
+
 
 
 // 일단은 몽고DB 사용하려면 백엔드단이 있어야한다고 판단했음. 리액트로 나중에 마이그레이션
 
 
 // adding workout name - array
-let workoutList = []
+// let workoutList = []
 // 변수명 변경 시작
 let kgsAndReps = []
 let workoutTitle = ''
@@ -61,23 +68,52 @@ app.get('/', (req, res) => {
 
     const formattedDate = date.toLocaleDateString("en", options)
 
+    WorkoutName.find((err, workoutNames) => {
 
-    res.render('list', {
-        listTitle: formattedDate,
-        workoutList: workoutList
-    });
+        if (workoutNames.length === 0) {
+            WorkoutName.insertMany(defaultWorkoutName, (err) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log("successfully saved default workoutNames")
+                    res.redirect('/')
+                }
+            })
+        } else {
+            res.render('list', {
+                listTitle: formattedDate,
+                workoutList: workoutNames
+            });
+        }
+
+
+    })
+
+
 });
 
 
 app.post('/', (req, res) => {
-    console.log(req.body)
-    let workoutList_element = req.body.workoutList_element
-    workoutList.push(_.startCase(workoutList_element))
+    const workoutList_element = req.body.workoutList_element;
+    const newWorkOutName = new WorkoutName({
+        name: workoutList_element
+    });
+    newWorkOutName.save();
     res.redirect('/')
 }
-
-
 );
+
+app.post('/delete', (req, res) => {
+    const checkedItemId = req.body.checkbox;
+    WorkoutName.findByIdAndDelete(checkedItemId, (err) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log("successfully deleted the item with id")
+            res.redirect('/');
+        }
+    })
+})
 
 app.get('/workout', (req, res) => {
     res.render('workout', {
@@ -88,16 +124,45 @@ app.get('/workout', (req, res) => {
 
 
 app.get('/workout/:anyname', (req, res) => {
-    const loweredParams = _.lowerCase(req.params.anyname)
-    workoutList.forEach((content) => {
-        const loweredListContent = _.lowerCase(content)
-        if (loweredParams === loweredListContent) {
-            res.render('workout', {
-                workoutTitle: _.startCase(content),
-                kgsAndReps: kgsAndReps
-            })
+
+    const anyName = req.params.anyname;
+
+    eachWorkoutList.findOne({ name: anyName }, function (err, found) {
+        if (!err) {
+            if (!found) {
+                const eachworkout = new eachWorkoutList({
+                    name: anyName,
+                    kg: 1,
+                    rep: 1
+                })
+                eachworkout.save();
+            } else {
+                res.render("workout", {
+                    workoutTitle: anyName,
+
+                })
+            }
         }
     })
+
+    // const eachworkout = new eachWorkoutList({
+    //     name: anyName,
+    //     kg: 1,
+    //     rep: 1
+    // })
+
+    // eachworkout.save();
+
+    // const loweredParams = _.lowerCase(req.params.anyname)
+    // workoutList.forEach((content) => {
+    //     const loweredListContent = _.lowerCase(content)
+    //     if (loweredParams === loweredListContent) {
+    //         res.render('workout', {
+    //             workoutTitle: _.startCase(content),
+    //             kgsAndReps: kgsAndReps
+    //         })
+    //     }
+    // })
 })
 
 

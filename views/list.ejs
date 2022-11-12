@@ -13,14 +13,21 @@
     <!-- 이 자리에 운동+몇회+몇세트 결과 집어넣기 -->
     <!-- for loop를 돌리지만 map function으로 옮겨도 괜찮은 거 같다. -->
     <div class="exList">
-        <% for (let i=0 ; i < workoutList.length; i++){ %>
-            <div>
-                <h1>
-                    <%=workoutList[i]%>
-                </h1>
-                <a href="/workout/<%= workoutList[i] %>">go</a>
-            </div>
-            <% } %>
+
+        <form action="/delete" method="post">
+
+            <% workoutList.forEach((item)=>{ %>
+                <div>
+                    <input type="checkbox" value="<%= item._id %>" name="checkbox" onChange="this.form.submit()">
+                    <h1>
+                        <%=item.name%>
+                    </h1>
+                    <a href="/workout/<%= item %>">go</a>
+
+                </div>
+                <% }) %>
+        </form>
+
     </div>
 
 
