@@ -5,12 +5,13 @@
     </h1>
 
     <div class="listTitle">
-        <% for(let i=0; i < kgsAndReps.length; i++){ %>
+
+        <% kgsAndReps.forEach((item)=>{ %>
             <h1>
-                <%= kgsAndReps[i][0] %>kg
-                    <%= kgsAndReps[i][1] %>reps
+                <%= item.kg %>kg
+                    <%= item.rep %>reps
             </h1>
-            <% } %>
+            <% }) %>
     </div>
 
     <form action="/workout" method="post">

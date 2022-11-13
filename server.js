@@ -127,53 +127,49 @@ app.get('/workout/:anyname', (req, res) => {
 
     const anyName = req.params.anyname;
 
-    eachWorkoutList.findOne({ name: anyName }, function (err, found) {
-        if (!err) {
-            if (!found) {
-                const eachworkout = new eachWorkoutList({
-                    name: anyName,
-                    kg: 1,
-                    rep: 1
-                })
-                eachworkout.save();
-            } else {
-                res.render("workout", {
-                    workoutTitle: anyName,
-
-                })
-            }
-        }
+    eachWorkoutList.find({ name: anyName }, function (err, found) {
+        res.render("workout", {
+            workoutTitle: anyName,
+            kgsAndReps: found
+        })
     })
-
-    // const eachworkout = new eachWorkoutList({
-    //     name: anyName,
-    //     kg: 1,
-    //     rep: 1
-    // })
-
-    // eachworkout.save();
-
-    // const loweredParams = _.lowerCase(req.params.anyname)
-    // workoutList.forEach((content) => {
-    //     const loweredListContent = _.lowerCase(content)
-    //     if (loweredParams === loweredListContent) {
-    //         res.render('workout', {
-    //             workoutTitle: _.startCase(content),
-    //             kgsAndReps: kgsAndReps
-    //         })
-    //     }
-    // })
 })
-
-
 
 app.post('/workout', (req, res) => {
-    const kgAndRep = [req.body.kg, req.body.rep]
-    kgsAndReps.push(kgAndRep)
-    workoutTitle = req.body.workoutTitle
-    console.log(req.body)
-    res.redirect('/workout')
+
+    const workoutName = req.body.workoutTitle
+    const eachWorkout = new eachWorkoutList({
+        name: req.body.workoutTitle,
+        kg: req.body.kg,
+        rep: req.body.rep
+    })
+    eachWorkout.save()
+    res.redirect('/workout/' + workoutName)
 })
+
+// const eachworkout = new eachWorkoutList({
+//     name: anyName,
+//     kg: 1,
+//     rep: 1
+// })
+
+// eachworkout.save();
+
+// const loweredParams = _.lowerCase(req.params.anyname)
+// workoutList.forEach((content) => {
+//     const loweredListContent = _.lowerCase(content)
+//     if (loweredParams === loweredListContent) {
+//         res.render('workout', {
+//             workoutTitle: _.startCase(content),
+//             kgsAndReps: kgsAndReps
+//         })
+//     }
+// })
+
+
+
+
+
 // :anyone 라우트로 redirect 하는 게 불가능하지 않나? 
 // 그럼 어떻게 하면 좋을까. 어차피 form 안에 모든 내용들 담겨있을 거고 리스트까지 있으니까
 // 새로 만들어진 라우트는 실제로 만들어지게 만드는 게 나으려나? 라우트가 엄청 많아지겠지만.
