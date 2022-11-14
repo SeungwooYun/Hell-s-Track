@@ -3,11 +3,11 @@ Hell'sTrack is a web app designed to make it easy to keep track of exercise reco
 You can create a list of exercises planned for the day, and record the weight and number of times of each exercise.
 
 
-Used Skills
+Used Skills:
 HTML CSS, Javascript, Node.js, Express.js, ejs, lodash, mongoDB
 
 
-Future improvements
+Future improvements:
 1) 각 운동의 쉬는 시간 설정
 2) 일자별로 운동한 기록들을 저장하고, 운동기록이 증가하였는지 확인할 수 있게 설졍
 3) Fatsecret APIs를 이용해서 자신의 식단을 편리하게 관리할 수 있도록 구현
