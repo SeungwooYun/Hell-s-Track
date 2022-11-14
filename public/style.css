@@ -1,18 +1,33 @@
+@font-face {
+    font-family: "squealer";
+    src: url('squealer.woff');
+}
+
+@font-face {
+    font-family: "squealer-embossed";
+    src: url('squealer-embossed.woff');
+}
+
 body {
     background-color:black;
     text-align: center;
 }
 
-footer {
+
+label {
     color: red;
 }
 
-label {
-    color: red
+footer {
+    color: red;
+    position : relative;
 }
 
 .Title {
     color: red;
+    font-family: "squealer";
+    font-size: 5rem;
+    margin: 0;
 }
 
 .contact {
@@ -20,7 +35,7 @@ label {
 }
 
 .listTitle {
-    color: red;
+    color: yellow;
 }
 
 /* Navbar */
@@ -28,6 +43,8 @@ nav {
     background-color: red;
 }
 nav ul {
+    font-family: "squealer";
+    font-size: 1.5rem;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -54,3 +71,71 @@ li a {
     color: red;
     display:inline;
 }
+
+.eachExList h1 {
+    text-align: center;
+    color: red;
+    display:block;
+}
+
+.aboutUs {
+    color: red;
+}
+
+.aboutUs h2 {
+    font-family: squealer;
+    font-size: 2rem;
+}
+
+/* .aboutUs p {
+    text-align: left;
+} */
+
+.contact{
+    padding: 10px;
+}
+
+.contact a {
+    text-decoration:none;
+    color: orange;
+}
+
+.contact h1{
+    font-size: 1.5rem;
+    color: red;
+    
+}
+
+.contact img {
+    border-radius: 100%;
+    margin: 10px;
+}
+
+@media ( max-width: 420px ) {
+    .Title {
+        font-size: 3rem;
+        margin: 10px;
+    }
+    nav ul li a {
+        text-align: center;
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+
+    .exList {
+        position: relative;
+        left: 15%;
+        font-size: 0.5rem;
+        text-align: left;
+    }
+
+    .listTitle{
+        color: yellow;
+    }
+
+    .aboutUs p {
+        text-align: left;
+    }
+    
+  }
