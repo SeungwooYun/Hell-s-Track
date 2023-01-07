@@ -6,13 +6,12 @@ You can create a list of exercises planned for the day, and record the weight an
 Used Skills:
 HTML CSS, Javascript, Node.js, Express.js, ejs, lodash, mongoDB
 
+인원: 단독작업
 
-Future improvements:
-1) 각 운동의 쉬는 시간 설정
-- Change to set the break time for each exercise
-2) 일자별로 운동한 기록들을 저장하고, 운동기록이 증가하였는지 확인할 수 있게 설졍
-- Save exercise records by date and change to see if exercise records have increased
-3) Fatsecret APIs를 이용해서 자신의 식단을 편리하게 관리할 수 있도록 구현
-- Use Fatsecret APIs to implement convenient management of your diet
-4) 자신의 몸 사진을 각 일자마다 올려서 그 변화과정을 확인할 수 있도록 구현
-- Posting a picture of body on each date to see how body changes
+node.js를 사용하여 서버를 만들고 MongoDB와 연동하였습니다. 
+
+운동의 이름을  입력하면 해당 운동들이 리스트 형식으로 렌더링됩니다. 운동명을 클릭하면 다이나믹라우팅으로 해당 운동이 제목인 페이지가 열리며, 그 페이지 속에서 무게와 횟수를 기록할 수 있습니다. 입력한 운동과 무게, 횟수는 MongoDB 데이터베이스에 저장됩니다.  
+
+본 프로젝트는 반응형으로 제작되었으며, ejs를 사용하여 헤더와 푸터를 템플릿으로 사용하였습니다. 
+
+자바스크립트와 몽고DB로 CRUD를 구현한 웹앱입니다. 
